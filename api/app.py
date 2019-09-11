@@ -1,11 +1,15 @@
-from flask import Flask, jsonify, abort
 import urllib.request, json
+import os
+from flask import Flask, jsonify, abort
 from flask import request
+from github import Github
 
 app = Flask(__name__)
 
-from github import Github
-g = Github("d6c9b24658480460bbdd78125c99b766b43648ff")
+DEBUG = os.getenv('DEBUG', True)
+TOKEN = os.getenv('API_TOKEN')
+
+g = Github(TOKEN)
 
 
 @app.route('/')
@@ -31,4 +35,4 @@ def get_repos():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=DEBUG)
