@@ -9,7 +9,7 @@ app = Flask(__name__)
 DEBUG = os.getenv('DEBUG', True)
 TOKEN = os.getenv('API_TOKEN')
 HOST = os.getenv('HOST', '127.0.0.1')
-PORT = os.getenv('PORT', 5000)
+PORT = int(os.getenv('PORT', 5000))
 
 g = Github(TOKEN)
 
