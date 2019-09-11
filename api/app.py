@@ -27,12 +27,14 @@ def get_repos():
 
     repositories = g.search_repositories(query=f'language:{l}')[:n]
 
-    for repo in repositories:
-        with urllib.request.urlopen(repo.url) as url:
-            data = json.loads(url.read().decode())
-        r.append(data)
-
-    return jsonify({'repos': r})
+    try:
+        for repo in repositories:
+            with urllib.request.urlopen(repo.url) as url:
+                data = json.loads(url.read().decode())
+            r.append(data)
+        return jsonify({'repos': r, 'status': 'ok'})
+    except IndexError as e:
+        return jsonify({'repos': r, 'status': 'ko'})
 
 
 if __name__ == '__main__':
