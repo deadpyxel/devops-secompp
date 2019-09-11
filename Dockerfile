@@ -14,4 +14,4 @@ RUN chown -R pyuser:pyuser /app
 USER pyuser
 
 EXPOSE 5000
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:5000"]
+CMD ["gunicorn", "app:app", "--config=config.py"]
