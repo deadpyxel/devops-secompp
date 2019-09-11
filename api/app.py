@@ -8,6 +8,8 @@ app = Flask(__name__)
 
 DEBUG = os.getenv('DEBUG', True)
 TOKEN = os.getenv('API_TOKEN')
+HOST = os.getenv('HOST', '127.0.0.1')
+PORT = int(os.getenv('PORT', 5000))
 
 g = Github(TOKEN)
 
@@ -38,4 +40,4 @@ def get_repos():
 
 
 if __name__ == '__main__':
-    app.run(debug=DEBUG)
+    app.run(host=HOST, port=PORT, debug=DEBUG)
