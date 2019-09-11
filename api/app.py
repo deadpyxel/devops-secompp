@@ -19,12 +19,13 @@ def get_repos():
     try:
         args = request.args
         n = int(args['n'])
+        l = args['l']
     except (ValueError, LookupError) as e:
         abort(
-            jsonify(error="No integer provided for argument 'n' in the URL",
+            jsonify(error="You need to provide \'n\' and \'l\' argument",
                     message=f"{e}"))
 
-    repositories = g.search_repositories(query='language:python')[:n]
+    repositories = g.search_repositories(query=f'language:{l}')[:n]
 
     for repo in repositories:
         with urllib.request.urlopen(repo.url) as url:
